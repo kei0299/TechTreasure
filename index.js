@@ -1,4 +1,4 @@
-const port = 3000;
+const port = process.env.PORT || 3000;
 const express = require("express");
 const path = require("path"); // パスの設定に使うモジュール
 const app = express();
