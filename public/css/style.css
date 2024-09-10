@@ -1,0 +1,32 @@
+img {
+  display: block;
+  width: 80px;
+  opacity: 1;
+  text-align: center;
+}
+
+ul {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+li {
+  margin: 5px;
+  position: relative;
+}
+
+.footer {
+  text-align: center;
+}
+
+.pokemon {
+  display: inline-block;
+  text-align: center;
+  opacity: 0;
+}
+
+.pokemon-1 {
+  display: inline-block;
+  text-align: center;
+  opacity: 1;
+}
