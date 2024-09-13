@@ -1,43 +1,47 @@
-// containerを取得
-const container = document.querySelector('#container');
-const poke_num = 50
-
-//urlを変数baseURLに入れる
-const baseURL = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/'
-
-//pokemonは151匹いるのでその分ループを回す
-for (let i = 1; i <= poke_num; i++) {
-    //divの中にimgタグとspanが入るようにしたい
-    const pokemon = document.createElement('div');
-    pokemon.id = `pokemon-${i}`;
-    //divに対してclass(pokemon)を割り当てる
-    pokemon.classList.add('pokemon');
-    const label = document.createElement('span');
-    //labelにポケモンの番号が出力されるようにする
-    label.innerText = `#${i}`;
-    //containerに画像の要素を追加
-    const newImg = document.createElement('img');
-
-    //画像の要素newImgにbaseURLを追加
-    newImg.src = `${baseURL}${i}.png`;
-
-    //上で作ったdiv(pokemon)に画像(newImg)を入れる
-    pokemon.appendChild(newImg);
-    pokemon.appendChild(label);
-    container.appendChild(pokemon);
-}
-
 // ボタン要素を取得
 const spinButton = document.getElementById('spin');
+const logo_num = 56;
 
 // ボタンがクリックされたときのイベントリスナー
 spinButton.addEventListener('click', () => {
-    // 1から151の間でランダムな数字を生成
-    const randomNumber = Math.floor(Math.random() * poke_num) + 1;
+    const randomNumber = Math.floor(Math.random() * 100) + 1;
 
     // 結果を表示する
     document.getElementById('result').innerText = `ランダムな数字: ${randomNumber}`;
-    const pokemonElement = document.querySelector(`#pokemon-${randomNumber}`);
-    pokemonElement.style.opacity = 1; 
+    const logoElement = document.querySelector(`#logo-${randomNumber}`);
+    const currentOpacity = window.getComputedStyle(logoElement).opacity;
+    if (logoElement) {
+    if (currentOpacity === '1') {
+        console.log("表示済み");
+    } else {
+        // 表示されていない場合は表示する
+        logoElement.style.opacity = 1;
+        logoElement.classList.add('expanded');
+
+        // 2秒後に元の位置に戻る
+        setTimeout(() => {
+            logoElement.classList.remove('expanded');
+            // 元の位置にスクロールする
+            logoElement.scrollIntoView({
+                behavior: 'smooth', // スクロールのアニメーションを滑らかにする
+                block: 'center',    // 要素を画面の中央に配置
+                inline: 'nearest'  // 水平方向で画面内に収まるようにする
+            });
+        }, 2000); // 2秒間拡大表示
+
+
+        // logoElement.scrollIntoView({
+        //     behavior: 'smooth', // スクロールのアニメーションを滑らかにする
+        //     block: 'center', // 要素を画面の中央に配置
+        //     inline: 'nearest' // 水平方向で画面内に収まるようにする
+        // });
+        // setTimeout(() => {
+        //     const userInput = prompt("おめでとうございます!初めてのロゴが出ました!あなたの名前を入力してください:");
+        //     console.log(`ユーザーの入力: ${userInput}`);
+        // }, 2000); // 2000ミリ秒 = 2秒
+    }
+} else {
+    console.log(`Element with ID #logo-${randomNumber} not found`);
+}
 });
 

@@ -1,3 +1,5 @@
+DELETE FROM logo;
+
 INSERT INTO logo (id, logo_name, src_svg, flag, owner_name) VALUES (1, 'HTML', 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg', FALSE, null);
 INSERT INTO logo (id, logo_name, src_svg, flag, owner_name) VALUES (2, 'CSS', 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg', FALSE, null);
 INSERT INTO logo (id, logo_name, src_svg, flag, owner_name) VALUES (3, 'Sass', 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/sass/sass-original.svg', FALSE, null);
@@ -5,7 +7,7 @@ INSERT INTO logo (id, logo_name, src_svg, flag, owner_name) VALUES (4, 'LESS', '
 INSERT INTO logo (id, logo_name, src_svg, flag, owner_name) VALUES (5, 'Bootstrap', 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/bootstrap/bootstrap-original.svg', FALSE, null);
 INSERT INTO logo (id, logo_name, src_svg, flag, owner_name) VALUES (6, 'Bulma', 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/bulma/bulma-plain.svg', FALSE, null);
 INSERT INTO logo (id, logo_name, src_svg, flag, owner_name) VALUES (7, 'Foundation', 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/foundation/foundation-original.svg', FALSE, null);
-INSERT INTO logo (id, logo_name, src_svg, flag, owner_name) VALUES (8, 'tailwind', 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original-wordmark.svg', FALSE, null);
+INSERT INTO logo (id, logo_name, src_svg, flag, owner_name) VALUES (8, 'tailwind', 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg', FALSE, null);
 INSERT INTO logo (id, logo_name, src_svg, flag, owner_name) VALUES (9, 'JavaScript', 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg', FALSE, null);
 INSERT INTO logo (id, logo_name, src_svg, flag, owner_name) VALUES (10, 'TypeScript', 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg', FALSE, null);
 INSERT INTO logo (id, logo_name, src_svg, flag, owner_name) VALUES (11, 'Vue.js', 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vuejs/vuejs-original.svg', FALSE, null);

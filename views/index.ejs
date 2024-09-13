@@ -18,8 +18,17 @@
     <p id="result"></p>
 
     <section id="container">
+        <div class="logo-container">
+            <% for(let logo of logos) { %>
+                <div id="logo-<%= logo.id %>" class="logo-card">
+                    <img src="<%= logo.src_svg %>" alt="<%= logo.name %>">
+                    <p>
+                        <%= logo.logo_name %>
+                    </p>
+                </div>
+                <% } %>
+        </div>
     </section>
-    
 
     <script src="/js/main.js"></script>
 </body>
