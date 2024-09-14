@@ -11,13 +11,30 @@ app.use(express.json());
 
 app.get("/", (req, res) => {
   db.query(
-    `select * from logo;`, (error, results) => {
+    `select * from logo order by id asc;`, (error, results) => {
       res.render('index', {
         title: 'TechTreasure',
         logos: results.rows,
       });
     }
   );
+});
+
+// フラグ更新用のルート
+app.post('/update-flag', (req, res) => {
+  const { id } = req.body;
+
+  // フラグを更新するSQLクエリ
+  const query = 'UPDATE logo SET flag = true WHERE id = $1';
+
+  db.query(query, [id])
+    .then(() => {
+      res.json({ success: true });
+    })
+    .catch(error => {
+      console.error('フラグ更新エラー:', error);
+      res.status(500).json({ success: false });
+    });
 });
 
 app.post('/save-name', (req, res) => {

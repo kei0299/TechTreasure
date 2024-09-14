@@ -1,65 +1,72 @@
 // ボタン要素を取得
 const spinButton = document.getElementById('spin');
-const logo_num = 56;
+const logo_num = 100;
 
 // ボタンがクリックされたときのイベントリスナー
 spinButton.addEventListener('click', () => {
-    const randomNumber = Math.floor(Math.random() * 100) + 1;
-
-    // 結果を表示する
-    document.getElementById('result').innerText = `ランダムな数字: ${randomNumber}`;
+    const randomNumber = Math.floor(Math.random() * logo_num) + 1;
     const logoElement = document.querySelector(`#logo-${randomNumber}`);
+    
     if (logoElement) {
-    const currentOpacity = window.getComputedStyle(logoElement).opacity;
-    if (currentOpacity === '1') {
-        alert("残念！既に出ています！");
-    } else {
-        // 表示されていない場合は表示、logoテーブルのflagをtrueにする
+        const currentOpacity = window.getComputedStyle(logoElement).opacity;
+        if (currentOpacity === '1') {
+            alert("残念！既に出ています！");
+        } else {
+            // 表示されていない場合は表示し、サーバーにフラグを更新するリクエストを送信
+            fetch('/update-flag', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ id: randomNumber }) // ロゴのIDを送信
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    logoElement.style.opacity = 1;
+                    logoElement.classList.add('expanded');
 
+                    // 2秒後に元の位置に戻る
+                    setTimeout(() => {
+                        logoElement.classList.remove('expanded');
+                        logoElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'center',
+                            inline: 'nearest'
+                        });
+                    }, 1000); 
 
-        logoElement.style.opacity = 1;
-        logoElement.classList.add('expanded');
-
-        // 2秒後に元の位置に戻る
-        setTimeout(() => {
-            logoElement.classList.remove('expanded');
-            // 元の位置にスクロールする
-            logoElement.scrollIntoView({
-                behavior: 'smooth', // スクロールのアニメーションを滑らかにする
-                block: 'center',    // 要素を画面の中央に配置
-                inline: 'nearest'  // 水平方向で画面内に収まるようにする
+                    // 名前を保存するためのプロンプトを表示
+                    setTimeout(() => {
+                        const userInput = prompt("おめでとうございます！初めてのロゴが出ました!\nあなたの名前を入力してください:", "名無し");
+                        if (userInput) {
+                            // 名前をサーバーに送信
+                            fetch('/save-name', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify({ name: userInput, id: randomNumber }) // ユーザー名とロゴIDを送信
+                            })
+                            .then(response => {
+                                if (response.ok) {
+                                    alert("名前が正常に登録されました！");
+                                } else {
+                                    alert("名前の登録中にエラーが発生しました。");
+                                }
+                            })
+                            .catch(error => {
+                                alert("リクエスト中にエラーが発生しました。");
+                            });
+                        }
+                    }, 2000);
+                }
+            })
+            .catch(error => {
+                console.error("データベース更新中にエラーが発生しました", error);
             });
-        }, 1000); // 2秒間拡大表示
-
-        setTimeout(() => {
-            const userInput = prompt("おめでとうございます！初めてのロゴが出ました!\nあなたの名前を入力してください:","名無し");
-            console.log(`ユーザーの入力: ${userInput}`);
-            if (userInput) {
-                // ユーザーの入力をサーバーに送信
-                fetch('/save-name', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ name: userInput, id: randomNumber }) // ユーザー名を送信
-                })
-                .then(response => {
-                    if (response.ok) {
-                        console.log('名前が正常に保存されました');
-                        alert("名前が正常に登録されました！");
-                    } else {
-                        console.log('名前の保存中にエラーが発生しました');
-                        alert("名前の登録中にエラーが発生しました。");
-                    }
-                })
-                .catch(error => {
-                    console.error('リクエスト中にエラーが発生しました', error);
-                    alert("リクエスト中にエラーが発生しました。");
-                });
-            }
-        }, 2000); // 2000ミリ秒 = 2秒
+        }
+    } else {
+        alert("残念！ハズレです！！");
     }
-} else {
-    alert("残念！ハズレです！！");
-}
 });

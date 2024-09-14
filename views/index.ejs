@@ -20,7 +20,7 @@
     <section id="container">
         <div class="logo-container">
             <% for(let logo of logos) { %>
-                <div id="logo-<%= logo.id %>" class="logo-card">
+                <div id="logo-<%= logo.id %>" class="logo-card" style="opacity: <%= logo.flag ? '1' : '0' %>">
                     <img src="<%= logo.src_svg %>" alt="<%= logo.name %>">
                     <p>
                         <%= logo.logo_name %>

@@ -44,3 +44,4 @@ body {
   transform: translate(-50%, -50%) scale(5); /* 中央に配置してサイズを倍に拡大 */
   object-fit: contain; /* 画像が画面内に収まるように調整 */
 }
+
