@@ -1,18 +1,18 @@
-const { Client } = require('pg');
 
-const connection = new Client ({
-  host: 'localhost',
-  user: 'test',
-  password: '',
-  database: 'techtreasure',
-  port: 5432
-});
+const isDbLocal = ((process.env.PGHOST || "localhost") === "localhost");
 
-connection.connect((err) => {
-  if (err) {
-    console.log('error connecting: ' + err.stack);
-    return
-  }
-});
+function getConfig() {
+    if (isDbLocal) {
+        return {
+            max: 10
+        };
 
-module.exports = connection;
+    } else {
+        return {
+            max: 10,
+            ssl: {
+                rejectUnauthorized: false,
+            }
+        };
+    }
+}
