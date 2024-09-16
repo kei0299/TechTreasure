@@ -52,6 +52,20 @@ app.post('/save-name', (req, res) => {
     });
 });
 
+app.post('/reset', (req, res) => {
+  // データベースにクエリを実行
+  db.query('UPDATE logo SET flag = false;', (error, results) => {
+    if (error) {
+      // エラーが発生した場合の処理
+      console.error('データベースエラー:', error);
+      res.status(500).send("データベースへの保存中にエラーが発生しました");
+    } else {
+      // 成功した場合の処理
+      res.status(200).send("リセットしました");
+    }
+  });
+});
+
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`The server has started and is listening on port number: ${port}`);

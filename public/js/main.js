@@ -132,6 +132,24 @@ spinButton.addEventListener('click', () => {
 });
 
 resetButton.addEventListener('click', () => {
-    window.confirm("初期化してもよろしいですか？");
-
+    if (window.confirm("初期化してもよろしいですか？")) {
+        fetch('/reset', {
+            method: 'POST',
+        })
+        .then(response => {
+            if (response.ok) {
+                return response.text(); // または response.json() の場合もあります
+            } else {
+                throw new Error("リセットに失敗しました。");
+            }
+        })
+        .then(message => {
+            alert(message); // サーバーからのメッセージをアラートで表示
+            location.reload(); // リセットが成功した場合、ページをリロード
+        })
+        .catch(error => {
+            alert("リクエスト中にエラーが発生しました: " + error.message);
+        });
+    }
+    
 });
