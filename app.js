@@ -7,7 +7,7 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public"))); // publicディレクトリを静的ファイルのルートに設定
 app.use(express.urlencoded({ extended: false }));
-app.use(express.json()); 
+app.use(express.json());
 
 app.get("/", (req, res) => {
   db.query(
@@ -49,7 +49,7 @@ app.post('/save-name', (req, res) => {
     .catch((error) => {
       console.error('データベースエラー:', error);
       res.status(500).send("データベースへの保存中にエラーが発生しました");
-  });
+    });
 });
 
 const port = process.env.PORT || 3000;

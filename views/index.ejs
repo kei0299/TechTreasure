@@ -10,30 +10,39 @@
 </head>
 
 <body>
-    <h1>TechTreasure</h1>
-    <p>ガチャを回してロゴを集めよう！</p>
-
-
-    <button id="spin">回す</button>
-    <p id="result"></p>
+    <div class="title">
+        <input id="bom" class="reset" type="image" src="image/bom.gif">
+        <img class="title_logo" src="image/tech_logo.png">
+    </div>
+    <div class="spin_cent">
+        <input id="spin" class="rotate_a" type="image" src="image/SPIN.png">
+    </div>
+    <input id="hidden_logo" type="image" src="image/SPIN.png" style="display: none">
 
     <section id="container">
         <div class="logo-container">
             <% for(let logo of logos) { %>
-                <div id="logo-<%= logo.id %>" class="logo-card" style="opacity: <%= logo.flag ? '1' : '0' %>">
-                    <img src="<%= logo.src_svg %>" alt="<%= logo.name %>">
-                    <p>
-                        <%= logo.logo_name %>
-                    </p>
-                </div>
-                <% } %>
-        </div>
+                <% if (logo.flag) { %>
+                    <div id="logo-<%= logo.id %>" class="logo-card" style="opacity: 1 ">
+                        <% } else { %>
+                            <div id="logo-<%= logo.id %>" class="logo-card" style="opacity: 0 ">
+                                <% } %>
+                                    <img src="<%= logo.src_svg %>" alt="<%= logo.name %>">
+                                    <p>
+                                        <%= logo.logo_name %>
+                                            <br>
+                                            <img class="crown" src="image/crown.png" alt="獲得者:">
+                                            <%= logo.owner_name %>
+                                    </p>
+                            </div>
+                            <% } %>
+                    </div>
     </section>
 
     <script src="/js/main.js"></script>
 </body>
 <footer class="footer">
-    <p>2024 @TechTreasure</p>
+    <p>©2024 TechTreasure</p>
 </footer>
 
 </html>

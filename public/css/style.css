@@ -1,5 +1,27 @@
-body {
-  background-color: darkslategray;
+.title {
+  display: flex;
+  justify-content: center; /* 横方向の中央揃え */
+  align-items: center;
+  position: relative;
+}
+
+.spin_cent {
+  text-align: center;
+}
+
+.reset {
+  position: absolute;
+  left: 0; /* 左端に配置 */
+  top: 0;  /* 上端に配置 */
+  width: 150px;
+}
+
+.crown {
+  max-width: 30px;
+}
+
+.title_logo{
+  width: 70%;
 }
 
 .logo-container img{
@@ -7,41 +29,53 @@ body {
 }
 
 .logo-container {
-  display: flex; /* Flexboxで横並びにする */
+  display: flex;
   justify-content: center;
-  flex: 1;
-  flex-wrap: wrap; /* コンテナの幅を超えた場合に折り返す */
-  align-items: center;    /* 中央に配置 */
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: -50px;
 }
 
 .logo-card {
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;  
-  max-width: 100px; 
-  max-height: 120px; 
+  text-align: center;
+  max-width: 130px;
+  max-height: 120px;
   padding: 20px;
-  opacity: 0;
-  transition: opacity 3s; 
+  padding-top: 100px;
+  transition: opacity 3s;
   position: relative;
 }
 
-#container {
-  background-color: white;
-}
-
-
 .footer {
   text-align: center;
+  margin-top: 100px;
 }
 
-.expanded {
-  position: fixed; /* スクロール位置を固定 */
+.rotate_a {
+  width: 300px;
+  height: 300px;
+  margin: 0 auto; /* 横方向の中央揃え */
+  animation: rotate_anime 4s linear infinite;
+}
+
+@keyframes rotate_anime {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+#hidden_logo {
+  position: fixed;
   top: 50%;
   left: 50%;
-  z-index: 1000; /* 他の要素の上に表示 */
-  transform: translate(-50%, -50%) scale(5); /* 中央に配置してサイズを倍に拡大 */
-  object-fit: contain; /* 画像が画面内に収まるように調整 */
+  transform: translate(-50%, -50%);
+  display: none;
+  z-index: 1000;
+  background-color: white;
 }
-
