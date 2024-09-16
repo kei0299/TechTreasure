@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const path = require("path");
-const pool = require('./db/db');
+const pool = require('./db/');
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -10,15 +10,21 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  pool.query(
-    `select * from logo order by id asc;`, (error, results) => {
-      res.render('index', {
-        title: 'TechTreasure',
-        logos: results.rows,
-      });
+  pool.query('SELECT * FROM logo ORDER BY id ASC;', (error, results) => {
+    if (error) {
+      console.error("Database query error:", error); // エラーログを出力
+      return res.status(500).send("Database query failed."); // クエリ失敗時にエラーレスポンスを返す
     }
-  );
+
+    console.log("Query results:", results); // 結果が正しく返っているか確認
+
+    res.render("index", {
+      title: "TechTreasure",
+      logos: results?.rows || [], // resultsがundefinedでないか確認
+    });
+  });
 });
+
 
 // フラグ更新用のルート
 app.post('/update-flag', (req, res) => {
