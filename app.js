@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const path = require("path");
-const db = require('./db/db');
+const pool = require('./pool/pool');
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -10,7 +10,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  db.query(
+  pool.query(
     `select * from logo order by id asc;`, (error, results) => {
       res.render('index', {
         title: 'TechTreasure',
@@ -27,7 +27,7 @@ app.post('/update-flag', (req, res) => {
   // フラグを更新するSQLクエリ
   const query = 'UPDATE logo SET flag = true WHERE id = $1';
 
-  db.query(query, [id])
+  pool.query(query, [id])
     .then(() => {
       res.json({ success: true });
     })
@@ -42,7 +42,7 @@ app.post('/save-name', (req, res) => {
   // データベースに名前を保存するクエリ
   const query = 'UPDATE logo SET owner_name = $1 WHERE id = $2;';
 
-  db.query(query, [name, id])
+  pool.query(query, [name, id])
     .then(() => {
       res.status(200).send("名前を保存しました");
     })
@@ -54,7 +54,7 @@ app.post('/save-name', (req, res) => {
 
 app.post('/reset', (req, res) => {
   // データベースにクエリを実行
-  db.query('UPDATE logo SET flag = false;', (error, results) => {
+  pool.query('UPDATE logo SET flag = false;', (error, results) => {
     if (error) {
       // エラーが発生した場合の処理
       console.error('データベースエラー:', error);
