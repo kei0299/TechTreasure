@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const path = require("path");
-const pool = require('./db/');
+const pool = require('./db/db');
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
