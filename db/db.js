@@ -16,5 +16,3 @@ function getConfig() {
         };
     }
 }
-
-module.exports = { query: query };
