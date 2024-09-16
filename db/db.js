@@ -18,3 +18,5 @@ function getConfig() {
 }
 
 const pool = new Pool(getConfig());
+
+module.exports = pool;  // poolをエクスポートする
