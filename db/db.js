@@ -1,4 +1,4 @@
-
+const { Pool } = require('pg');
 const isDbLocal = ((process.env.PGHOST || "localhost") === "localhost");
 
 function getConfig() {
@@ -16,3 +16,5 @@ function getConfig() {
         };
     }
 }
+
+const pool = new Pool(getConfig());
