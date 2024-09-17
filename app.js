@@ -62,6 +62,8 @@ app.post('/reset', (req, res) => {
       console.error('データベースエラー:', error);
       res.status(500).send("データベースへの保存中にエラーが発生しました");
     } else {
+      const body = document.body;
+      body.style.opacity = 0; 
       res.status(200).send("リセットしました");
     }
   });
