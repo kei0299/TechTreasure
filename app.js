@@ -16,8 +16,6 @@ app.get("/", (req, res) => {
       return res.status(500).send("Database query failed."); // クエリ失敗時にエラーレスポンスを返す
     }
 
-    console.log("Query results:", results); // 結果が正しく返っているか確認
-
     res.render("index", {
       title: "TechTreasure",
       logos: results?.rows || [], // resultsがundefinedでないか確認
