@@ -48,6 +48,8 @@ const judge = (logoSrc, randomNumber, logoElement, time) => {
     hiddenLogo.style.display = "block";
 
 
+
+
     return new Promise((resolve) => {
         setTimeout(() => {
 
@@ -69,7 +71,10 @@ const judge = (logoSrc, randomNumber, logoElement, time) => {
                             logoElement.style.opacity = 1;
 
                             // 名前を保存するためのプロンプトを表示
-                            const userInput = prompt("おめでとうございます！初めてのロゴが出ました!\nあなたの名前を入力してください:", "名無し");
+                            setTimeout(() => {
+                                const userInput = prompt("おめでとうございます！初めてのロゴが出ました!\nあなたの名前を入力してください:", "名無し");
+                            }, 3000);
+                            
                             if (userInput) {
                                 // 名前をサーバーに送信
                                 fetch('/save-name', {
@@ -138,14 +143,14 @@ resetButton.addEventListener('click', () => {
         })
         .then(response => {
             if (response.ok) {
-                return response.text(); // または response.json() の場合もあります
+                return response.text();
             } else {
                 throw new Error("リセットに失敗しました。");
             }
         })
         .then(message => {
-            alert(message); // サーバーからのメッセージをアラートで表示
-            location.reload(); // リセットが成功した場合、ページをリロード
+            alert(message);
+            location.reload();
         })
         .catch(error => {
             alert("リクエスト中にエラーが発生しました: " + error.message);

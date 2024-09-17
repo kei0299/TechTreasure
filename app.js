@@ -12,8 +12,8 @@ app.use(express.json());
 app.get("/", (req, res) => {
   pool.query('SELECT * FROM logo ORDER BY id ASC;', (error, results) => {
     if (error) {
-      console.error("Database query error:", error); // エラーログを出力
-      return res.status(500).send("Database query failed."); // クエリ失敗時にエラーレスポンスを返す
+      console.error("Database query error:", error); 
+      return res.status(500).send("Database query failed."); 
     }
 
     res.render("index", {
@@ -24,11 +24,9 @@ app.get("/", (req, res) => {
 });
 
 
-// フラグ更新用のルート
+// フラグ更新
 app.post('/update-flag', (req, res) => {
   const { id } = req.body;
-
-  // フラグを更新するSQLクエリ
   const query = 'UPDATE logo SET flag = true WHERE id = $1';
 
   pool.query(query, [id])
@@ -41,9 +39,9 @@ app.post('/update-flag', (req, res) => {
     });
 });
 
+// 名前保存
 app.post('/save-name', (req, res) => {
   const { name, id } = req.body;
-  // データベースに名前を保存するクエリ
   const query = 'UPDATE logo SET owner_name = $1 WHERE id = $2;';
 
   pool.query(query, [name, id])
@@ -56,15 +54,13 @@ app.post('/save-name', (req, res) => {
     });
 });
 
+// リセット処理
 app.post('/reset', (req, res) => {
-  // データベースにクエリを実行
   pool.query('UPDATE logo SET flag = false;', (error, results) => {
     if (error) {
-      // エラーが発生した場合の処理
       console.error('データベースエラー:', error);
       res.status(500).send("データベースへの保存中にエラーが発生しました");
     } else {
-      // 成功した場合の処理
       res.status(200).send("リセットしました");
     }
   });
