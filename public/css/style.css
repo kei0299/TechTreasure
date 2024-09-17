@@ -1,7 +1,6 @@
 .title {
   display: flex;
-  justify-content: center; /* 横方向の中央揃え */
-  align-items: center;
+  justify-content: center;
   position: relative;
 }
 
@@ -11,9 +10,9 @@
 
 .reset {
   position: absolute;
-  left: 0; /* 左端に配置 */
-  top: 0;  /* 上端に配置 */
-  width: 150px;
+  left: 0;
+  top: 0; 
+  width: 10%;
 }
 
 .crown {
@@ -32,21 +31,18 @@
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  align-items: center;
   margin-top: -50px;
 }
 
 .logo-card {
   display: flex;
   flex-direction: column;
-  align-items: center;
   text-align: center;
   max-width: 130px;
   max-height: 120px;
   padding: 20px;
   padding-top: 100px;
   transition: opacity 3s;
-  position: relative;
 }
 
 .footer {
@@ -55,12 +51,10 @@
 }
 
 .rotate_a {
-  width: 300px;
-  height: 300px;
-  margin: 0 auto; /* 横方向の中央揃え */
+  width: 20%;
+  height: 20%;
   animation: rotate_anime 4s linear infinite;
 }
-
 @keyframes rotate_anime {
   0% {
     transform: rotate(0deg);
@@ -72,24 +66,34 @@
 
 #hidden_logo {
   position: fixed;
+  width: 30%;
+  height: 30%;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  display: none;
   z-index: 1000;
   background-color: white;
+  animation: logo 2s ease-in-out forwards ;
+}
+@keyframes logo {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
-
-
-.btn {
-  box-sizing: border-box;
-  background-color: #000;
-  color: #fff;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 45px;
-  width: 80%;
+#hidden_bom {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.4);
+  animation: zoom_in 2s ease-in-out forwards ;
+}
+@keyframes zoom_in {
+  100% {
+    transform: translate(-50%, -50%) scale(3);
+    opacity: 0;
+  }
 }

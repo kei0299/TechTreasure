@@ -5,6 +5,7 @@
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="icon" href="image/spin.png" type="image/x-icon">
     <title>TechTreasure</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
 </head>
@@ -18,16 +19,10 @@
         <input id="spin" class="rotate_a" type="image" src="image/spin.png">
         <p>※音が出るので注意してください。</p>
     </div>
+
+    <!-- hidden_image -->
     <input id="hidden_logo" type="image" src="image/crown.png" style="display: none">
-
-
-	<audio id="audio_bom" preload="auto">
-        <source  src="audio/bom.mp3" type="audio/mp3">
-    </audio>
-
-    <audio id="audio_spin" preload="auto">
-        <source  src="audio/spin.mp3" type="audio/mp3">
-    </audio>
+    <img id="hidden_bom" src="image/reset_img.png" style="display: none" />
 
     <section id="container">
         <div class="logo-container" onselectstart="return false;" onmousedown="return false;">
@@ -48,6 +43,12 @@
                             <% } %>
                     </div>
     </section>
+
+    <!-- audio -->
+    <audio id="audio_bom" src="audio/bom.mp3"></audio>
+    <audio id="audio_spin" src="audio/spin.mp3"></audio>
+    <audio id="audio_get" src="audio/get.mp3"></audio>
+    <audio id="audio_fail" src="audio/fail.mp3"></audio>
 
     <script src="/js/main.js"></script>
 </body>

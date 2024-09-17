@@ -48,14 +48,12 @@ const judge = (logoSrc, randomNumber, logoElement, time) => {
     hiddenLogo.src = logoSrc;
     hiddenLogo.style.display = "block";
 
-
-
-
     return new Promise((resolve) => {
         setTimeout(() => {
 
             const currentOpacity = window.getComputedStyle(logoElement).opacity;
             if (currentOpacity === '1') {
+                document.getElementById('audio_fail').play(); 
                 alert("残念！既に出ています！");
             } else {
                 // 表示されていない場合は表示し、サーバーにフラグを更新するリクエストを送信
@@ -70,11 +68,11 @@ const judge = (logoSrc, randomNumber, logoElement, time) => {
                     .then(data => {
                         if (data.success) {
                             logoElement.style.opacity = 1;
+                            document.getElementById('audio_get').play(); 
 
                             // 名前を保存するためのプロンプトを表示
 
                                 const userInput = prompt("おめでとうございます！初めてのロゴが出ました!\nあなたの名前を入力してください:", "名無し");
-
                             
                             if (userInput) {
                                 // 名前をサーバーに送信
@@ -139,14 +137,16 @@ spinButton.addEventListener('click', () => {
 // リセットボタンがクリックされたときのイベント
 resetButton.addEventListener('click', () => {
     if (window.confirm("リセットしてもよろしいですか？")) {
+        const hiddenBom = document.getElementById("hidden_bom");
         document.getElementById('audio_bom').play(); 
+        
+        hiddenBom.style.display = "block";
+
         fetch('/reset', {
             method: 'POST',
         })
         .then(response => {
             if (response.ok) {
-                const body = document.body;
-                body.style.opacity = 0; 
                 return response.text();
             } else {
                 throw new Error("リセットに失敗しました。");
@@ -162,8 +162,3 @@ resetButton.addEventListener('click', () => {
     }
     
 });
-
-function audio() {
-    document.getElementById('btn_audio').currentTime = 0; //連続クリックに対応
-    document.getElementById('btn_audio').play(); //クリックしたら音を再生
-}
