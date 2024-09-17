@@ -103,7 +103,7 @@ const judge = (logoSrc, randomNumber, logoElement, time) => {
             }
             setTimeout(() => {
             hiddenLogo.style.display = "none";
-        }, 3000);
+        }, 1000);
             resolve();
         }, time)
     })
