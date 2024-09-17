@@ -108,9 +108,7 @@ const judge = (logoSrc, randomNumber, logoElement, time) => {
     })
 };
 
-
-
-// ボタンがクリックされたときのイベントリスナー
+// ボタンがクリックされたときのイベント
 let dblClickFlag = null;
 async function buttonFunction(logoSrc, randomNumber, logoElement) {
     await spin_UP(0);
@@ -118,7 +116,7 @@ async function buttonFunction(logoSrc, randomNumber, logoElement) {
     await judge(logoSrc, randomNumber, logoElement, 500)
 };
 
-
+// スピンボタンがクリックされたときのイベント
 spinButton.addEventListener('click', () => {
     const randomNumber = Math.floor(Math.random() * logo_num) + 1;
     const logoElement = document.querySelector(`#logo-${randomNumber}`);
@@ -136,6 +134,7 @@ spinButton.addEventListener('click', () => {
 
 });
 
+// スピンボタンがクリックされたときのイベント
 resetButton.addEventListener('click', () => {
     if (window.confirm("初期化してもよろしいですか？")) {
         fetch('/reset', {

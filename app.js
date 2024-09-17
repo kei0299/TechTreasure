@@ -9,6 +9,7 @@ app.use(express.static(path.join(__dirname, "public"))); // publicディレク�
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
+// index.ejsの表示
 app.get("/", (req, res) => {
   pool.query('SELECT * FROM logo ORDER BY id ASC;', (error, results) => {
     if (error) {
