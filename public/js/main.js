@@ -71,9 +71,9 @@ const judge = (logoSrc, randomNumber, logoElement, time) => {
                             logoElement.style.opacity = 1;
 
                             // 名前を保存するためのプロンプトを表示
-                            setTimeout(() => {
+
                                 const userInput = prompt("おめでとうございます！初めてのロゴが出ました!\nあなたの名前を入力してください:", "名無し");
-                            }, 3000);
+
                             
                             if (userInput) {
                                 // 名前をサーバーに送信
@@ -101,8 +101,9 @@ const judge = (logoSrc, randomNumber, logoElement, time) => {
                         console.error("データベース更新中にエラーが発生しました", error);
                     });
             }
-
+            setTimeout(() => {
             hiddenLogo.style.display = "none";
+        }, 3000);
             resolve();
         }, time)
     })
