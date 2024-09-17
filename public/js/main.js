@@ -143,6 +143,8 @@ resetButton.addEventListener('click', () => {
         })
         .then(response => {
             if (response.ok) {
+                const body = document.body;
+                body.style.opacity = 0; 
                 return response.text();
             } else {
                 throw new Error("リセットに失敗しました。");
