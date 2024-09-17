@@ -5,9 +5,6 @@
   position: relative;
 }
 
-.body {
-    transition: opacity 3s; /* opacity要素(不透明度)の変更を3秒間かけて行う */
-}
 .spin_cent {
   text-align: center;
 }
@@ -81,4 +78,18 @@
   display: none;
   z-index: 1000;
   background-color: white;
+}
+
+
+
+.btn {
+  box-sizing: border-box;
+  background-color: #000;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 45px;
+  width: 80%;
 }

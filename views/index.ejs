@@ -16,11 +16,21 @@
     </div>
     <div class="spin_cent">
         <input id="spin" class="rotate_a" type="image" src="image/spin.png">
+        <p>※音が出るので注意してください。</p>
     </div>
     <input id="hidden_logo" type="image" src="image/crown.png" style="display: none">
 
+
+	<audio id="audio_bom" preload="auto">
+        <source  src="audio/bom.mp3" type="audio/mp3">
+    </audio>
+
+    <audio id="audio_spin" preload="auto">
+        <source  src="audio/spin.mp3" type="audio/mp3">
+    </audio>
+
     <section id="container">
-        <div class="logo-container">
+        <div class="logo-container" onselectstart="return false;" onmousedown="return false;">
             <% for(let logo of logos) { %>
                 <% if (logo.flag) { %>
                     <div id="logo-<%= logo.id %>" class="logo-card" style="opacity: 1 ">

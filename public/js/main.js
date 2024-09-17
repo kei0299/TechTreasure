@@ -19,6 +19,7 @@ const scrollView = (logoElement, time) => {
 
 //ガチャハンドルの回転数UP
 const spin_UP = (time) => {
+    document.getElementById('audio_spin').play(); 
     return new Promise((resolve) => {
         setTimeout(() => {
             // 画像を時計回りに1回転させる
@@ -135,9 +136,10 @@ spinButton.addEventListener('click', () => {
 
 });
 
-// スピンボタンがクリックされたときのイベント
+// リセットボタンがクリックされたときのイベント
 resetButton.addEventListener('click', () => {
-    if (window.confirm("初期化してもよろしいですか？")) {
+    if (window.confirm("リセットしてもよろしいですか？")) {
+        document.getElementById('audio_bom').play(); 
         fetch('/reset', {
             method: 'POST',
         })
@@ -160,3 +162,8 @@ resetButton.addEventListener('click', () => {
     }
     
 });
+
+function audio() {
+    document.getElementById('btn_audio').currentTime = 0; //連続クリックに対応
+    document.getElementById('btn_audio').play(); //クリックしたら音を再生
+}
