@@ -57,14 +57,14 @@ app.post('/save-name', (req, res) => {
 
 // リセット処理
 app.post('/reset', (req, res) => {
-  pool.query('UPDATE logo SET flag = false, owner_name = "";', (error, results) => {
-    if (error) {
-      console.error('データベースエラー:', error);
-      res.status(500).send("データベースへの保存中にエラーが発生しました");
-    } else {
-      res.status(200).send("リセットしました");
-    }
-  });
+pool.query("UPDATE logo SET flag = false, owner_name = '';", (error, results) => {
+  if (error) {
+    console.error('データベースエラー:', error);
+    res.status(500).send("データベースへの保存中にエラーが発生しました");
+  } else {
+    res.status(200).send("リセットしました");
+  }
+});
 });
 
 const port = process.env.PORT || 3000;
