@@ -57,7 +57,7 @@ app.post('/save-name', (req, res) => {
 
 // リセット処理
 app.post('/reset', (req, res) => {
-  pool.query('UPDATE logo SET flag = false;', (error, results) => {
+  pool.query('UPDATE logo SET flag = false, owner_name = "";', (error, results) => {
     if (error) {
       console.error('データベースエラー:', error);
       res.status(500).send("データベースへの保存中にエラーが発生しました");
